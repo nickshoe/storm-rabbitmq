@@ -20,52 +20,62 @@ import java.util.Map;
  *
  */
 public class RabbitMQBolt extends BaseRichBolt {
-  private static final long serialVersionUID = 97236452008970L;
 
-  private final TupleToMessage scheme;
-  private final Declarator declarator;
+	private static final long serialVersionUID = 97236452008970L;
 
-  private transient Logger logger;
-  private transient RabbitMQProducer producer;
-  private transient OutputCollector collector;
+	private final TupleToMessage scheme;
+	private final Declarator declarator;
 
-  public RabbitMQBolt(final TupleToMessage scheme) {
-    this(scheme, new Declarator.NoOp());
-  }
+	private transient Logger logger;
+	private transient RabbitMQProducer producer;
+	private transient OutputCollector collector;
 
-  public RabbitMQBolt(final TupleToMessage scheme, final Declarator declarator) {
-    this.scheme = scheme;
-    this.declarator = declarator;
-  }
+	public RabbitMQBolt(final TupleToMessage scheme) {
+		this(scheme, new Declarator.NoOp());
+	}
 
-  @Override
-  public void prepare(@SuppressWarnings("rawtypes") final Map stormConf, final TopologyContext context, final OutputCollector collector) {
-    producer = new RabbitMQProducer(declarator);
-    producer.open(stormConf);
-    logger = LoggerFactory.getLogger(this.getClass());
-    this.collector = collector;
-    this.scheme.prepare(stormConf);
-    logger.info("Successfully prepared RabbitMQBolt");
-  }
+	public RabbitMQBolt(final TupleToMessage scheme, final Declarator declarator) {
+		this.scheme = scheme;
+		this.declarator = declarator;
+	}
 
-  @Override
-  public void execute(final Tuple tuple) {
-      publish(tuple);
-      // tuples are always acked, even when transformation by scheme yields Message.NONE as
-    // if it failed once it's unlikely to succeed when re-attempted (i.e. serialization/deserilization errors).
-      acknowledge(tuple);
-  }
+	@Override
+	public void prepare(Map<String, Object> topoConf, TopologyContext context, OutputCollector collector) {
+		this.logger = LoggerFactory.getLogger(this.getClass());
+		
+		this.collector = collector;
+		this.producer = new RabbitMQProducer(declarator);
+		
+		this.producer.open(topoConf);
+		this.scheme.prepare(topoConf);
+		
+		this.logger.info("Successfully prepared RabbitMQBolt");
+	}
 
-    protected void acknowledge(Tuple tuple) {
-        collector.ack(tuple);
-    }
+	@Override
+	public void execute(final Tuple tuple) {
+		this.publish(tuple);
+		
+		// tuples are always acked, even when transformation by scheme yields Message.NONE
+		// as if it failed once it's unlikely to succeed when re-attempted 
+		// (i.e. serialization/deserilization errors).
+		this.acknowledge(tuple);
+	}
 
-    protected void publish(Tuple tuple) {
-        producer.send(scheme.produceMessage(tuple));
-    }
+	protected void publish(Tuple tuple) {
+		Message message = scheme.produceMessage(tuple);
+		
+		this.producer.send(message);
+	}
 
-    @Override
-  public void declareOutputFields(final OutputFieldsDeclarer declarer) {
-    //No fields are emitted from this drain.
-  }
+	protected void acknowledge(Tuple tuple) {
+		this.collector.ack(tuple);
+	}
+
+	@Override
+	public void declareOutputFields(final OutputFieldsDeclarer declarer) {
+		// Since this is a sink, no downstream bolts should be specified. 
+		// Thus, it's not necessary to specify the output fields.
+	}
+
 }

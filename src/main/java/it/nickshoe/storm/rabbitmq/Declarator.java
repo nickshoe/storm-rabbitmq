@@ -8,7 +8,9 @@ public interface Declarator extends Serializable {
   void execute(Channel channel);
 
   public static class NoOp implements Declarator {
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public void execute(Channel channel) {}
   }
 }
