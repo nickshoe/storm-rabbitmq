@@ -1,4 +1,4 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
 import java.io.Serializable;
 import java.util.List;

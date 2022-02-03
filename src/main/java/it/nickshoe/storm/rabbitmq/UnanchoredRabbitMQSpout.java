@@ -1,6 +1,6 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
-import io.latent.storm.rabbitmq.config.ConsumerConfig;
+import it.nickshoe.storm.rabbitmq.config.ConsumerConfig;
 import org.apache.storm.spout.Scheme;
 import org.apache.storm.spout.SpoutOutputCollector;
 

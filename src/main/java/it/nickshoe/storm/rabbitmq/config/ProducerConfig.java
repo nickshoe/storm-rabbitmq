@@ -1,10 +1,10 @@
-package io.latent.storm.rabbitmq.config;
+package it.nickshoe.storm.rabbitmq.config;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.latent.storm.rabbitmq.config.ConfigUtils.*;
+import static it.nickshoe.storm.rabbitmq.config.ConfigUtils.*;
 
 public class ProducerConfig implements Serializable
 {

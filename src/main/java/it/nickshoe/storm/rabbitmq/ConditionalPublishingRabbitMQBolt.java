@@ -1,13 +1,13 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
 
 import org.apache.storm.tuple.Tuple;
 
 /**
- * Simple extension of {@link io.latent.storm.rabbitmq.RabbitMQBolt} that provides the ability to determine whether a message should be published
+ * Simple extension of {@link RabbitMQBolt} that provides the ability to determine whether a message should be published
  * based on the input tuple
  * This class is sort of an SPI meaning that it is meant to be subclassed
- * and the method {@link io.latent.storm.rabbitmq.ConditionalPublishingRabbitMQBolt#shouldPublish}
+ * and the method {@link ConditionalPublishingRabbitMQBolt#shouldPublish}
  * to be overridden with the custom decision logic
  */
 public class ConditionalPublishingRabbitMQBolt extends RabbitMQBolt {

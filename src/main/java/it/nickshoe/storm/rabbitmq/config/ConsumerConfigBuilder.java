@@ -1,4 +1,4 @@
-package io.latent.storm.rabbitmq.config;
+package it.nickshoe.storm.rabbitmq.config;
 
 public final class ConsumerConfigBuilder
 {

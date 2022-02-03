@@ -1,6 +1,6 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
-import io.latent.storm.rabbitmq.config.ConnectionConfig;
+import it.nickshoe.storm.rabbitmq.config.ConnectionConfig;
 
 public class UnanchoredConsumer extends RabbitMQConsumer {
   public UnanchoredConsumer(ConnectionConfig connectionConfig,

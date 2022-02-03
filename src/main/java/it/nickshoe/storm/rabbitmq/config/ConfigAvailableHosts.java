@@ -1,4 +1,4 @@
-package io.latent.storm.rabbitmq.config;
+package it.nickshoe.storm.rabbitmq.config;
 
 import java.io.Serializable;
 import java.util.Map;

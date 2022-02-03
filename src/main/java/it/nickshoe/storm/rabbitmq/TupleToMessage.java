@@ -1,4 +1,4 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
 import org.apache.storm.tuple.Tuple;
 

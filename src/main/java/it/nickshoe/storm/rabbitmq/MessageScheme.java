@@ -1,4 +1,4 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
 import org.apache.storm.spout.Scheme;
 import org.apache.storm.task.TopologyContext;

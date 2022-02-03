@@ -1,6 +1,6 @@
-package io.latent.storm.rabbitmq;
+package it.nickshoe.storm.rabbitmq;
 
-import io.latent.storm.rabbitmq.config.ProducerConfig;
+import it.nickshoe.storm.rabbitmq.config.ProducerConfig;
 import org.apache.storm.tuple.Tuple;
 
 import java.util.Map;

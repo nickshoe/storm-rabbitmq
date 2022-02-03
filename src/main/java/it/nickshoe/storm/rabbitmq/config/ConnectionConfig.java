@@ -1,9 +1,9 @@
-package io.latent.storm.rabbitmq.config;
+package it.nickshoe.storm.rabbitmq.config;
 
-import static io.latent.storm.rabbitmq.config.ConfigUtils.addToMap;
-import static io.latent.storm.rabbitmq.config.ConfigUtils.getFromMap;
-import static io.latent.storm.rabbitmq.config.ConfigUtils.getFromMapAsBoolean;
-import static io.latent.storm.rabbitmq.config.ConfigUtils.getFromMapAsInt;
+import static it.nickshoe.storm.rabbitmq.config.ConfigUtils.addToMap;
+import static it.nickshoe.storm.rabbitmq.config.ConfigUtils.getFromMap;
+import static it.nickshoe.storm.rabbitmq.config.ConfigUtils.getFromMapAsBoolean;
+import static it.nickshoe.storm.rabbitmq.config.ConfigUtils.getFromMapAsInt;
 
 import java.io.Serializable;
 import java.net.URISyntaxException;
